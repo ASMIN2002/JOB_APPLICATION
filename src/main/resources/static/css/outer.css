@@ -1,0 +1,147 @@
+@charset "UTF-8";
+.main {
+	flex-wrap: wrap;
+	overflow-y: scroll;
+	max-height: 35.5rem;
+	width: 100%;
+	overflow-y: auto;
+	display: flex;
+	flex-wrap: wrap;
+	margin-left: 70px;
+}
+
+.carddata {
+	padding: 15px;
+	border-radius: 10px;
+	box-shadow: 0 0 10px black;
+	margin: 15px;
+	margin-top: 18px;
+	background: light;
+}
+
+.compdata {
+	padding: 15px;
+	border-radius: 10px;
+	box-shadow: 0 0 10px black;
+	margin: 15px;
+	margin-top: 18px;
+	background: light;
+	width: 42rem;
+	height: 15rem;
+}
+
+.bton button {
+	margin-left: 17px;
+	box-shadow: 0 0 8px black;
+}
+
+.login {
+	box-shadow: 0 0 10px black;
+	padding: 70px;
+	width: 160%;
+	border-radius: 10px;
+	margin-top: 30%;
+	margin-left: 123%;
+}
+
+.register {
+	box-shadow: 0 0 10px black;
+	padding: 5px;
+	width: 250%;
+	border-radius: 10px;
+	margin-top: 26%;
+	margin-left: 185%;
+}
+
+.compregister {
+	box-shadow: 0 0 10px black;
+	padding: 5px;
+	width: 150%;
+	border-radius: 10px;
+	margin-top: 16%;
+	margin-left: 105%;
+}
+
+.data {
+	margin: 10px;
+}
+
+.data input {
+	box-shadow: 0 0 5px black;
+	padding: 6px;
+	font-weight: bold;
+}
+
+.data textarea {
+	box-shadow: 0 0 5px black;
+	padding: 6px;
+	font-weight: bold;
+}
+
+#compsub {
+	display: flex;
+	gap: 3rem;
+	margin-left: 13px;
+}
+
+#submit button {
+	margin-top: 10px;
+	margin-left: 13px;
+	font-weight: bold;
+}
+
+.comp {
+	max-height: 35.5rem;
+	width: 100%;
+	overflow-y: auto;
+	flex-wrap: wrap;
+	margin-left: 70px;
+	display: flex;
+}
+
+.postJob {
+	box-shadow: 0 0 10px black;
+	border-radius: 10px;
+	width: 40%;
+	padding: 30px;
+	margin: 100px 10px 100px 10px;
+}
+
+.showPost {
+	box-shadow: 0 0 10px black;
+	border-radius: 10px;
+	width: 100%;
+	padding: 30px;
+	margin: 100px 10px 100px 0;
+	max-height: 34rem;
+	overflow: auto;
+}
+
+.companyHome {
+	display: flex;
+	width: 100vw;
+	margin-top: -65px;
+}
+
+.table {
+	border: 2px solid black;
+	box-shadow: 0 0 8px black;
+}
+.editbody{
+	margin-top: 13px;
+	padding: 20px;
+	width: 40%;
+	border-radius: 15px;
+	box-shadow: 0 0 10px black;
+}
+.formbody{
+	justify-content: center;
+	width: 142%;
+	margin-top: 20px;
+}
+.formbody input{
+	box-shadow: 0 0 3px black;
+}
+.formbody label{
+	margin-left: 10px;
+}

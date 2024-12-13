@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Company DashBoard</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+	crossorigin="anonymous">
+<link type="text/css" th:href="@{/css/style.css}" rel="stylesheet"></link>
+<link type="text/css" th:href="@{/css/user.css}" rel="stylesheet"></link>
+<link type="text/css" th:href="@{/css/outer.css}" rel="stylesheet"></link>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+	integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+	<nav
+		class="navbar navbar-expand-lg navbar-light bg-light border border-bottom-3 border-dark">
+		<div class="container-fluid">
+			<div
+				class="navbar-brand border border-success fw-bold rounded-3 p-1 border-3 bg-primary"
+				style="color: white">
+				<i class="fa-solid fa-cloud-bolt"></i> JobIN
+			</div>
+
+			<p th:text="'compemail: ' + ${email}" hidden="hidden"></p>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item"><a class="nav-link"
+						th:href="@{/compHist/{compemail}(compemail=${email})}"
+						style="color: green; font-weight: bold"><i
+							class="fa-solid fa-house"></i> Home</a></li>
+					<li class="nav-item"><a class="nav-link"
+						th:href="@{/jobs/{compemail}(compemail=${email})}"><i
+							class="fa-solid fa-rectangle-list"></i> Jobs</a></li>
+
+					<li class="nav-item"><a class="nav-link"
+						th:href="@{/CompNotify/{compemail}(compemail=${email})}"><i
+							class="fa-solid fa-bell"></i> Notification</a></li>
+
+				</ul>
+				<ul class="navbar-nav ms-auto mb-2 mb-lg-0"
+					style="margin-right: 20px">
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+						role="button" data-bs-toggle="dropdown" aria-expanded="false"><i
+							class="fa-solid fa-building-circle-check"></i> [[${email}]]</a>
+						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<li><a class="dropdown-item text-primary"
+								th:href="@{/checkCompProfile/{email}(email=${email})}">Your
+									Profile</a></li>
+							<li><a class="dropdown-item text-info" href="/">Logout</a></li>
+							<li><hr class="dropdown-divider"></li>
+							<li><a class="dropdown-item text-danger"
+								th:href="@{/deleteComp/{email}(email=${email})}"
+								onclick="return confirm('Warning* Everything will be deleted from your account!')">Delete</a></li>
+						</ul></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<section>
+		<div class="companyHome">
+			<div class="postJob">
+				<form action="/jobCompPost" method="post" th:each="comp: ${comps}">
+					<h3>Post New Job</h3>
+					<div th:if="${done}">
+						<p id="alertMessage" class="alert alert-success">JOB POSTED
+							SUCCESSFULLY</p>
+					</div>
+					<div class="mb-3">
+						<input type="text" class="form-control" name="compname"
+							th:value="${comp.compname}" hidden> <input type="text"
+							class="form-control" name="email" th:value="${comp.email}" hidden>
+						<input type="text" class="form-control" name="regyear"
+							th:value="${comp.regyear}" hidden>
+					</div>
+
+					<div class="mb-3">
+						<label>Enter Job Title</label> <input type="text"
+							class="form-control" name="title">
+					</div>
+					<div class="mb-3">
+						<label>Enter Experience</label> <input type="text"
+							class="form-control" name="exp">
+					</div>
+					<div class="mb-3">
+						<label>Enter Skills</label> <input type="text"
+							class="form-control" name="skills">
+					</div>
+					<div class="mb-3">
+						<label>Enter Salary</label> <input type="text"
+							class="form-control" name="salary">
+					</div>
+					<div class="mb-3">
+						<label>Enter Address</label> <input type="text"
+							class="form-control" name="addr">
+					</div>
+					<div class="mb-3">
+						<button type="submit" class="btn btn-primary">Post</button>
+
+					</div>
+				</form>
+			</div>
+			<div class="showPost">
+
+				<h2>History</h2>
+				<h4 th:if="${nulljobs}" class="fw-bold text-primary">NO DATA AVAILABLE</h4>
+				<table class="table" th:if="${job}">
+					<thead>
+						<tr>
+							<th scope="col">Title</th>
+							<th scope="col">Experience</th>
+							<th scope="col">Skills</th>
+							<th scope="col">Salary</th>
+							<th scope="col">Address</th>
+							<th scope="col">Status</th>
+							<th scope="col">Action</th>
+
+						</tr>
+					</thead>
+					<tbody style="font-size: 12px">
+						<tr th:each="job: ${jobs}">
+							<td th:text="${job.title}"></td>
+							<td th:text="${job.exp}"></td>
+							<td th:text="${job.skills}"></td>
+							<td th:text="${job.salary}"></td>
+							<td th:text="${job.addr}"></td>
+							<td th:text="${job.status}"></td>
+							<td><a
+								th:href="@{/editJobs/{id}/{email}(id=${job.id}, email=${job.email})}"
+								class="m-2"
+								style="text-decoration: none; font-weight: bold; font-size: 13px">Edit</a><a
+								th:href="@{/delete/{id}(id=${job.id})}"
+								onclick="return confirm('Are You Sure?')" class="m-2"
+								style="text-decoration: none; font-weight: bold; font-size: 13px; color: red">Delete</a></td>
+
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+	</section>
+	<script type="text/javascript">
+		
+    // Remove the alert after 5 seconds
+    setTimeout(() => {
+        const alert = document.getElementById('alertMessage');
+        if (alert) {
+            alert.style.display = 'none';
+        }
+    }, 1500); 
+
+	</script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+		crossorigin="anonymous"></script>
+</body>
+</html>

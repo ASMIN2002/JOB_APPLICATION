@@ -1,0 +1,110 @@
+@charset "UTF-8";
+
+.main {
+	max-height: 37rem;
+	width: 100%;
+	overflow-y: auto;
+	display: flex;
+	flex-wrap: wrap;
+	margin-left: 85px;
+}
+
+.compProfile {
+	width: 100%;
+	overflow-y: auto;
+	display: flex;
+	flex-wrap: wrap;
+	margin-left: 85px;
+}
+
+.carddata {
+	margin: 15px;
+	padding: 25px;
+	box-shadow: 0 0 7px black;
+}
+
+.bton {
+	display: flex;
+	width: 100%;
+}
+
+body {
+	overflow: hidden;
+}
+
+.login {
+	box-shadow: 0 0 10px black;
+	padding: 50px;
+	width: 50%;
+	border-radius: 10px;
+	margin-bottom: 10.1%;
+}
+
+.btnn {
+	display: flex;
+	justify-content: center;
+	gap: 1rem;
+}
+
+.btnn button {
+	border: 2px solid wheat;
+	box-shadow: 0 0 3px black;
+	border-radius: 25px;
+	font-weight: bold;
+	color: gray;
+}
+
+.reg {
+	box-shadow: 0 0 15px black;
+	padding: 20px;
+	width: 50%;
+	margin: auto;
+	border-radius: 15px;
+}
+
+.login input {
+	border: 2px solid black;
+}
+
+.footer {
+	background: blue;
+	color: white;
+	font-weight: bold;
+}
+
+.apply input {
+	box-shadow: 0 0 15px black;
+	padding: 20px;
+	width: 100%;
+	margin: auto;
+	border-radius: 15px;
+}
+
+.apply textarea {
+	box-shadow: 0 0 15px black;
+	padding: 20px;
+	width: 100%;
+	margin: auto;
+	border-radius: 15px;
+}
+
+.apply form {
+	margin: auto;
+	width: 100%;
+}
+
+.apply label {
+	font-weight: bold;
+}
+
+.apply {
+	width: 50%;
+}
+
+.editUser input {
+	width: 31rem;
+}
+
+.editCompany input {
+	width: 38rem;
+}

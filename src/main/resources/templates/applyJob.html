@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Apply Job</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+	crossorigin="anonymous">
+<link type="text/css" th:href="@{/css/user.css}" rel="stylesheet"></link>
+<link type="text/css" th:href="@{/css/style.css}" rel="stylesheet"></link>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+	integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+	<nav
+		class="navbar navbar-expand-lg navbar-light bg-light border border-bottom-3 border-dark">
+		<div class="container-fluid">
+
+
+			<ul class="navbar-nav mb-2 mb-lg-0" style="margin-right: 20px">
+				<li class="nav-item"><a class="nav-link text-primary"
+					style="font-weight: bold" id="navbarDropdown" role="button"
+					aria-expanded="false"><i class="fa-solid fa-building-circle"
+						style="color: yellow; font-weight: bold; font-size: 18px"></i> Job
+						Apply</a></li>
+			</ul>
+
+
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+					<li class="nav-item"><a
+						th:href="@{/userJobs/{email}(email=${email})}" class="nav-link">
+							<i class="fa-solid fa-left-long"></i> Go Back
+					</a></li>
+
+				</ul>
+				<div
+					class="navbar-brand border border-success fw-bold rounded-3 p-1 border-3 bg-primary"
+					style="color: white">
+					JobIN <i class="fa-solid fa-cloud-bolt"></i>
+				</div>
+			</div>
+		</div>
+	</nav>
+	<div class="container reg mt-4 apply">
+		<form action="/jobApply" method="post">
+
+			<div th:if="${success}">
+				<p id="alertMessage" class="alert alert-success">Applied
+					Successfully</p>
+			</div>
+			
+
+			<div class="mb-3">
+				<input type="text" class="form-control"
+					id="exampleInputPassword1" name="id" th:value="${id}" hidden="hidden">
+			</div>
+			<div class="mb-3">
+				<label for="exampleInputPassword1" class="form-label">Enter
+					Name</label> <input type="text" class="form-control"
+					id="exampleInputPassword1" name="name" required="required">
+			</div>
+			<div class="mb-3">
+				<input type="email" class="form-control" id="exampleInputEmail1"
+					aria-describedby="emailHelp" name="email" th:value="${email}"
+					readonly="readonly" hidden="hidden">
+			</div>
+			<div class="mb-3">
+				<input type="email" class="form-control" id="exampleInputEmail1"
+					aria-describedby="emailHelp" name="cemail" th:value="${cemail}"
+					readonly="readonly" hidden="hidden">
+			</div>
+			<div class="mb-3">
+				<label for="exampleInputPassword1" class="form-label">Degree</label>
+				<input type="text" class="form-control" id="exampleInputPassword1"
+					name="degree" required="required">
+			</div>
+			<div class="mb-3">
+				<label for="exampleInputPassword1" class="form-label">Message
+					To HR</label>
+				<textarea rows="5" cols="" class="form-control"
+					placeholder="Drop Your Message Here" name="message"
+					required="required"></textarea>
+			</div>
+			<button type="submit" class="btn btn-primary"
+				style="margin-left: 3px; border-radius: 5px; box-shadow: 0 0 5px black">Apply</button>
+
+		</form>
+	</div>
+
+</body>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+	crossorigin="anonymous"></script>
+<script type="text/javascript">
+	
+	 setTimeout(() => {
+        const alert = document.getElementById('alertMessage');
+        if (alert) {
+            alert.style.display = 'none';
+        }
+    }, 1500);
+    </script>
+</html>

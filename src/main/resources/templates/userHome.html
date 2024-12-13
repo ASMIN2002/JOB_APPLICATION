@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>User Profile</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+	crossorigin="anonymous">
+<link type="text/css" th:href="@{/css/user.css}" rel="stylesheet"></link>
+<link type="text/css" th:href="@{/css/style.css}" rel="stylesheet"></link>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+	integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body style="background: black">
+	<nav
+		class="navbar navbar-expand-lg navbar-light bg-light border border-bottom-3 border-dark">
+		<div class="container-fluid">
+
+
+			<ul class="navbar-nav mb-2 mb-lg-0" style="margin-right: 20px">
+				<li class="nav-item dropdown"><a
+					class="nav-link dropdown-toggle text-dark" id="navbarDropdown"
+					role="button" data-bs-toggle="dropdown" aria-expanded="false"><i
+						class="fa-solid fa-circle-user"
+						style="color: blue; font-weight: bold; font-size: 18px"></i>
+						PROFILE</a>
+
+					<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<li><a class="dropdown-item text-dark"
+							th:href="@{/checkUserProfile/{email}(email=${email})}">Profile
+								Check</a></li>
+						<li><hr class="dropdown-divider"></li>
+						<li><a class="dropdown-item text-danger"
+							th:href="@{/deleteUser/{email}(email=${email})}"
+							onclick="return confirm('Warning* Your all data will be deleted')">Delete
+								Account</a></li>
+					</ul></li>
+				<li><a class="dropdown-item text-primary mt-1" href="/"><i
+						class="fa-regular fa-circle-left" style="color: red"></i> Logout</a></li>
+			</ul>
+
+
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+					<li class="nav-item"><a
+						th:href="@{/userHome/{email}(email=${email})}" class="nav-link"
+						style="color: green; font-weight: bold"> <i
+							class="fa-solid fa-home"></i> Home
+					</a></li>
+					<li class="nav-item"><a
+						th:href="@{/userNotify/{email}(email=${email})}" class="nav-link">
+							<i class="fa-solid fa-bell"></i> Notification
+					</a></li>
+					<li class="nav-item"><a class="nav-link"
+						th:href="@{/userJobs/{email}(email=${email})}"> <i
+							class="fa-solid fa-rectangle-list"></i> Jobs
+					</a></li>
+					<li class="nav-item"><a class="nav-link"
+						th:href="@{/userComps/{email}(email=${email})}"> <i
+							class="fa-solid fa-building-circle-check"></i> Companies
+					</a></li>
+				</ul>
+				<div
+					class="navbar-brand border border-success fw-bold rounded-3 p-1 border-3 bg-primary"
+					style="color: white">
+					JobIN <i class="fa-solid fa-cloud-bolt"></i>
+				</div>
+			</div>
+		</div>
+	</nav>
+	<h1 class="text-center text-light" style="text-shadow: 0 0 4px white">Welcome [[${NAME}]]</h1>
+	<div class="topuser" style="display: flex;">
+		<div class="card m-4 bg-dark text-light"
+			style="width: 50rem; border: 2px solid aqua; box-shadow: 0 0 8px white">
+			<div class="card-body">
+				<h5 class="card-title">About Us</h5>
+				<p class="card-text">Some quick example text to build on the
+					card title and make up the bulk of the card's content.Some quick
+					example text to build on the card title and make up the bulk of the
+					card's content.</p>
+
+			</div>
+		</div>
+		<div class="card m-4 bg-dark text-light"
+			style="width: 50rem; border: 2px solid aqua; box-shadow: 0 0 8px white">
+			<div class="card-body">
+				<h5 class="card-title">Our Work</h5>
+				<p class="card-text">Some quick example text to build on the
+					card title and make up the bulk of the card's content.Some quick
+					example text to build on the card title and make up the bulk of the
+					card's content.</p>
+
+			</div>
+		</div>
+	</div>
+	<div id="carouselExampleIndicators" class="carousel slide"
+		data-bs-ride="carousel">
+		<div class="carousel-indicators">
+			<button type="button" data-bs-target="#carouselExampleIndicators"
+				data-bs-slide-to="0" class="active" aria-current="true"
+				aria-label="Slide 1"></button>
+			<button type="button" data-bs-target="#carouselExampleIndicators"
+				data-bs-slide-to="1" aria-label="Slide 2"></button>
+			<button type="button" data-bs-target="#carouselExampleIndicators"
+				data-bs-slide-to="2" aria-label="Slide 3"></button>
+		</div>
+		<div class="carousel-inner">
+			<div class="carousel-item active homeimg">
+				<img src="/img/homejob1.jpeg" class="d-block w-100" alt="...">
+			</div>
+			<div class="carousel-item homeimg">
+				<img src="/img/homejob2.jpeg" class="d-block w-100" alt="...">
+			</div>
+			<div class="carousel-item homeimg">
+				<img src="/img/homejob3.jpeg" class="d-block w-100" alt="...">
+			</div>
+		</div>
+		<button class="carousel-control-prev" type="button"
+			data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+			<span class="carousel-control-prev-icon" aria-hidden="true"></span> <span
+				class="visually-hidden">Previous</span>
+		</button>
+		<button class="carousel-control-next" type="button"
+			data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+			<span class="carousel-control-next-icon" aria-hidden="true"></span> <span
+				class="visually-hidden">Next</span>
+		</button>
+	</div>
+</body>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+	crossorigin="anonymous"></script>
+</html>

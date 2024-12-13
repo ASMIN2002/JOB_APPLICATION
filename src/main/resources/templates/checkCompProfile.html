@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Company Profile</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+	crossorigin="anonymous">
+<link type="text/css" th:href="@{/css/user.css}" rel="stylesheet"></link>
+<link type="text/css" th:href="@{/css/style.css}" rel="stylesheet"></link>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+	integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body style="height: 100vh">
+	<nav
+		class="navbar navbar-expand-lg navbar-light bg-light border border-bottom-3 border-dark">
+		<div class="container-fluid">
+			<div
+				class="navbar-brand border border-success fw-bold rounded-3 p-1 border-3 bg-primary"
+				style="color: white">
+				<i class="fa-solid fa-cloud-bolt"></i> JobIN
+			</div>
+
+			<p th:text="'compemail: ' + ${email}" hidden="hidden"></p>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item"><a class="nav-link"
+						th:href="@{/compHist/{compemail}(compemail=${email})}"><i
+							class="fa-solid fa-house"></i> Home</a></li>
+					<li class="nav-item"><a class="nav-link"
+						th:href="@{/jobs/{compemail}(compemail=${email})}"><i
+							class="fa-solid fa-rectangle-list"></i> Jobs</a></li>
+
+					<li class="nav-item"><a class="nav-link"
+						th:href="@{/CompNotify/{compemail}(compemail=${email})}"><i
+							class="fa-solid fa-bell"></i> Notification</a></li>
+
+				</ul>
+				<ul class="navbar-nav ms-auto mb-2 mb-lg-0"
+					style="margin-right: 20px">
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+						role="button" data-bs-toggle="dropdown" aria-expanded="false"
+						style="color: green; font-weight: bold"><i
+							class="fa-solid fa-building-circle-check"></i> [[${email}]]</a>
+						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<li><a class="dropdown-item text-primary"
+								th:href="@{/checkCompProfile/{email}(email=${email})}">Your
+									Profile</a></li>
+							<li><a class="dropdown-item text-info" href="/">Logout</a></li>
+							<li><hr class="dropdown-divider"></li>
+							<li><a class="dropdown-item text-danger"
+								th:href="@{/deleteComp/{email}(email=${email})}"
+								onclick="return confirm('Warning* Everything will be deleted from your account!')">Delete</a></li>
+						</ul></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<div class="compProfile" style="max-height: 41rem;">
+		<div th:object="${comp}">
+			<div>
+				<div class="carddata"
+					style="width: 35rem; height: 14rem; border-radius: 10px;">
+					<div class="card-body">
+						<h3 class="text-danger" style="margin-top: -25px">Company
+							Details</h3>
+						<div
+							style="font-size: 70px; display: flex; gap: 1rem; font-weight: bold; margin-top: -20px">
+							<div style="width: 20rem">
+								<p class="card-title" style="font-size: 15px; margin-top: 25px;">
+									<span>ID</span> : [[${comp.cid}]]<br> <span>NAME</span> :
+									[[${comp.compname}]]<br> <span>EMAIL</span> : <span
+										style="font-size: 13px">[[${comp.email}]]</span><br> <span>Location</span>
+									: [[${comp.loc}]]<br> <span>REG. YEAR</span> :
+									[[${comp.regyear}]]<br> <span>PASSWORD</span> :
+									[[${comp.password}]]
+								</p>
+							</div>
+							<div>
+								<i class="fa-solid fa-hotel"
+									style="font-size: 10rem; margin-left: 50px; margin-top: 5px"></i>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div style="height: 45rem; width: 45rem;">
+			<div class="carddata" style="border-radius: 10px">
+				<div>
+					<div class="card-body" style="height: 38.7rem; margin-top: -40px">
+						<div class="apply">
+							<form th:action="@{/updateCompany/{email}(email=${comp.email})}"
+								method="post" th:object="${dto}">
+								<h3 class="text-primary">Change Only Password</h3>
+								<div class="mb-2 editCompany">
+									<label for="exampleInputEmail1" class="form-label">Id</label> <input
+										type="text" class="form-control" id="exampleInputEmail1"
+										aria-describedby="emailHelp" th:value="${comp.cid}" readonly
+										style="border: none">
+								</div>
+								<div class="mb-3 editCompany">
+									<label for="exampleInputEmail1" class="form-label">Email</label>
+									<input type="email" class="form-control"
+										id="exampleInputEmail1" aria-describedby="emailHelp"
+										th:value="${comp.email}" readonly style="border: none">
+								</div>
+								<div class="mb-3 editCompany">
+									<label for="exampleInputEmail1" class="form-label">Name</label>
+									<input type="text" class="form-control" id="exampleInputEmail1"
+										aria-describedby="emailHelp" th:value="${comp.compname}"
+										name="compname" required readonly>
+								</div>
+								<div class="mb-3 editCompany">
+									<label for="exampleInputEmail1" class="form-label">REG.
+										YEAR</label> <input type="text" class="form-control"
+										id="exampleInputEmail1" aria-describedby="emailHelp"
+										th:value="${comp.regyear}" name="regyear" required readonly>
+								</div>
+								<div class="mb-3 editCompany">
+									<label for="exampleInputEmail1" class="form-label">Location</label>
+									<input type="text" class="form-control" id="exampleInputEmail1"
+										aria-describedby="emailHelp" th:value="${comp.loc}" name="loc"
+										required readonly>
+								</div>
+								<div class="mb-3 editCompany">
+									<label for="exampleInputEmail1" class="form-label">Password</label>
+									<input type="password" class="form-control"
+										id="exampleInputEmail1" aria-describedby="emailHelp"
+										th:value="${comp.password}" name="password" required>
+								</div>
+
+								<div style="display: flex;gap: 2rem">
+									<button type="submit" class="btn btn-primary"
+										style="margin-left: 2px">Update</button>
+									<a class="text-light btn btn-danger"
+										th:href="@{/deleteComp/{email}(email=${email})}"
+										onclick="return confirm('Warning* Everything will be deleted from your account!')">Delete Account</a>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<div style="height: 5rem; width: 37rem; margin-top: -30rem">
+			<div class="carddata" style="border-radius: 10px">
+				<div style="margin: -8px;">
+					<div class="card-body bg-info"
+						style="height: 22.2rem; border-radius: 10px">
+						<h1 class="text-center text-light">About Us</h1>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+							Sed do eiusmlla pariatur. Excepteur sint occaecat cupidatat
+							noonsequat. Duis aute irure dolor incat cupidatat non
+							proident.eprehenderit in voluptate velit esse cillum dolore eu
+							fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+							proident.on proident.aliqua. Ut enim ad minim veniam, quis
+							nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+							commodo consequat. Duis aute iru.</p>
+
+						<div style="display: flex; gap: 2rem; font-size: 10px">
+							<i class="fa-brands fa-instagram"> Asmin Kuldeep</i> <i
+								class="fa-brands fa-facebook"> Asmin Kuldeep</i> <i
+								class="fa-brands fa-whatsapp"> +91 00000 00000</i> <i
+								class="fa-brands fa-linkedin"> Asmin Kuldeep</i>
+						</div>
+						<div>
+							<footer class="text-center text-primary fw-bold mt-4">Developed
+								By Asmin Kuldeep Jena</footer>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</body>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+	crossorigin="anonymous"></script>
+</html>

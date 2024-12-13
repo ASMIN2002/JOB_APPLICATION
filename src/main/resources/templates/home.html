@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>All Jobs</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+	crossorigin="anonymous">
+<link type="text/css" th:href="@{/css/style.css}" rel="stylesheet"></link>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+	integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body style="position: relative; height: 100vh;">
+	<nav
+		class="navbar navbar-expand-lg navbar-light bg-light border border-bottom-3 border-dark">
+		<div class="container-fluid">
+			<div
+				class="navbar-brand border border-success fw-bold rounded-3 p-1 border-3 bg-primary"
+				style="color: white">
+				<i class="fa-solid fa-cloud-bolt"></i> JobIN
+			</div>
+
+			<p th:text="'compemail: ' + ${email}" hidden="hidden"></p>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item"><a class="nav-link" href="/"
+						style="color: blue; font-weight: bold"><i
+							class="fa-solid fa-house"></i> Jobs</a></li>
+					<li class="nav-item"><a class="nav-link" href="/comps"><i
+							class="fa-solid fa-building-circle-check"></i> Companies</a></li>
+				</ul>
+				<a th:href="@{login}"><button class="btn btn-primary btn-sm m-1">Login</button></a>
+				<a th:href="@{register}"><button class="btn btn-primary btn-sm">Register</button></a>
+
+			</div>
+		</div>
+	</nav>
+	<div class="main">
+	<div th:if="${notanyjobs}">
+			<h1 class="text-danger" style="margin: 16rem;margin-left: 34rem" th:text="${notanyjobs}"></h1>
+		</div>
+		<div th:each="job :${jobs}">
+			<div>
+				<div class="carddata" style="width: 20rem; height: 21rem">
+					<div class="card-body">
+						<p class="card-title"
+							style="display: flex; justify-content: space-between;">
+							Posted date : [[${job.date}]] <span
+								style="font-weight: bold; color: green; text-shadow: 0 0 11px aqua;"
+								th:if="${job.status}"><i class="fa-solid fa-circle"></i></span><span
+								style="font-weight: bold; color: red; text-shadow: 0 0 10px black"
+								th:unless="${job.status}"><i class="fa-solid fa-circle"></i></span>
+						</p>
+						<h4 class="card-title" th:text="${job.compname}"></h4>
+						<h6 class="card-subtitle mb-2 text-muted">
+							Role : [[${job.title}]]<br>Experience : [[${job.exp}]]
+						</h6>
+						<h6 class="card-text">SALARY : [[${job.salary}]]</h6>
+						<p class="card-text">
+							Skills : [[${job.skills}]]<br>Email : [[${job.email}]]<br>Location
+							: [[${job.addr}]]
+						</p>
+					</div>
+					<div th:if="${job.status}" class="bton" style="margin-top: -5px">
+						<a th:href="@{login}" class="card-link"><button
+								class="btn btn-sm bg-success"
+								style="width: 130px; color: white; cursor: pointer; margin-left: 12px">Apply
+								Job</button></a>
+					</div>
+					<div th:unless="${job.status}" class="bton"
+						style="margin-top: -5px">
+						<h5 class="text-center text-danger" style="margin-left: 15px">
+							Job Not Available for Now</h5>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:replace="~{footer::footer}"></div>
+</body>
+</html>

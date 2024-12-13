@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Update Jobs</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+	crossorigin="anonymous">
+<link type="text/css" th:href="@{/css/style.css}" rel="stylesheet"></link>
+<link type="text/css" th:href="@{/css/user.css}" rel="stylesheet"></link>
+<link type="text/css" th:href="@{/css/outer.css}" rel="stylesheet"></link>
+</head>
+<body>
+	<nav
+		class="navbar navbar-expand-lg navbar-light bg-light border border-bottom-3 border-dark">
+		<div class="container-fluid">
+			<div
+				class="navbar-brand border border-success fw-bold rounded-3 p-1 border-3 bg-primary"
+				style="color: white">JOB-BOARD</div>
+
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item"><a class="nav-link"
+						th:href="@{/compHist/{email}(email=${email})}"
+						style="color: green; font-weight: bold;">Go Back</a></li>
+				</ul>
+			</div>
+
+
+		</div>
+	</nav>
+	<h1 class="text-center">EDIT JOBS</h1>
+	<div class="container editbody">
+		<form th:action="@{/editCompJobs/{id}(id=${id})}" method="post" th:object="${jdto}" >
+			<div class="formbody">
+				<label class="formlabel">Job Title</label>
+				<div class="col-sm-8">
+					<input class="form-control" th:field="${jdto.title}">
+				</div>
+			</div>
+			<div class="formbody">
+				<label class="formlabel">Experience</label>
+				<div class="col-sm-8">
+					<input class="form-control" th:field="${jdto.exp}">
+				</div>
+			</div>
+			<div class="formbody">
+				<label class="formlabel">Skills</label>
+				<div class="col-sm-8">
+					<input class="form-control" th:field="${jdto.skills}">
+				</div>
+			</div>
+			<div class="formbody">
+				<label class="formlabel">Salary</label>
+				<div class="col-sm-8">
+					<input class="form-control" th:field="${jdto.salary}">
+				</div>
+			</div>
+			<div class="formbody">
+				<label class="formlabel">Address</label>
+				<div class="col-sm-8">
+					<input class="form-control" th:field="${jdto.addr}">
+				</div>
+			</div>
+			<div class="formbody">
+				<div class="col-sm-8">
+					<!-- Radio button for Active -->
+					<input class="form-check-input" type="radio"
+						name="flexRadioDefault" id="flexRadioDefault1"
+						th:checked="${active == 0}" value="true" th:field="*{status}"> <label
+						class="form-check-label text-success" for="flexRadioDefault1">
+						&nbsp;Active </label> &nbsp;&nbsp;&nbsp;
+
+					<!-- Radio button for Inactive -->
+					<input class="form-check-input" type="radio"
+						name="flexRadioDefault" id="flexRadioDefault2"
+						th:checked="${inactive == 1}" value="false" th:field="*{status}"> <label
+						class="form-check-label text-danger" for="flexRadioDefault2">
+						&nbsp;InActive </label>
+				</div>
+			</div>
+			<div class="formbody">
+				<button type="submit" class="btn btn-primary"
+					style="margin-left: 30%">Submit</button>
+			</div>
+
+
+		</form>
+	</div>
+</body>
+</html>
